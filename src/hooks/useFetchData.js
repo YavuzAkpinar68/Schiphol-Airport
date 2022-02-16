@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
 
-const useFetchData = () => {
+const useFetchData = (schedule,button, time) => {
   const [data, setData] = useState([])
   const config = {
     "accept": "application/json",
@@ -12,7 +12,7 @@ const useFetchData = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("https://api.schiphol.nl/public-flights/flights", { headers: config })
+      const response = await axios.get(`https://api.schiphol.nl/public-flights/flights?${schedule}${time}&includedelays=false&page=0&sort=%2BscheduleTime`, { headers: config })
       setData(response.data.flights)
       console.log(response.data.flights)
     } catch (error) {
@@ -22,7 +22,7 @@ const useFetchData = () => {
 
   useEffect(() => {
     fetchData()
-  }, [])
+  }, [button])
   return {data}
 }
 

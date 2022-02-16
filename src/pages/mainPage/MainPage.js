@@ -1,14 +1,42 @@
-import React from "react";
-import { SafeAreaView, Text } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import React, { useState } from "react";
+import { SafeAreaView, Text, FlatList, Button, ActivityIndicator } from "react-native";
+import MainPageCard from "../../components/cards/mainPageCard/MainPageCard";
+import Input from "../../components/input/Input";
 import useFetchData from '../../hooks/useFetchData';
 
 const MainPage = () => {
-  const {data} = useFetchData()
+  const [schedule, setSchedule] = useState('')
+  const [hour, setHour] = useState('')
+  const [minute, setMinute] = useState('')
+  const [buttonSignal, setButtonSignal] = useState(false)
+  const { data } = useFetchData(schedule, buttonSignal, hour)
+  const navigation = useNavigation()
 
-  return(
+  const handleRender = ({ item }) => (
+    <MainPageCard item={item} onPress={() => navigation.navigate('DetailPage', { item: item })} />
+  )
+
+  const handleSchedule = () => {
+    setSchedule(`scheduleDate=${schedule}`)
+    setHour(`&scheduleTime=${hour}%3A${minute}`)
+    setButtonSignal(true)
+    if (buttonSignal) {
+      setButtonSignal(false)
+    }
+  }
+
+  return (
     <SafeAreaView>
-      <Text>a</Text>
-      <FlatList data={data} renderItem={({item}) => <Text>{item.flightDirection}</Text>}/>
+      <Input title="Please write fly date as YYYY-MM-DD" placeholder="fly date" onChangeText={setSchedule} />
+      <Input title="Please write fly hour as HH" placeholder="fly hour" onChangeText={setHour} />
+      <Input title="Please write fly minute as MM" placeholder="fly minute" onChangeText={setMinute} />
+      <Button title="a" onPress={handleSchedule}></Button>
+      {
+        data ?
+          <FlatList data={data} renderItem={handleRender} />
+          : <ActivityIndicator />
+      }
     </SafeAreaView>
   )
 }

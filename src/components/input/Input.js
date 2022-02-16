@@ -1,11 +1,11 @@
 import React from "react";
-import { TextInput, View } from "react-native";
+import { Text, TextInput, View } from "react-native";
 
-const Input = ({value, onChangeText, placeholder}) => {
+const Input = ({title, onChangeText, placeholder}) => {
   return(
     <View>
+      <Text>{title}</Text>
       <TextInput 
-        value={value}
         onChangeText={onChangeText}
         placeholder={placeholder}/>
     </View>
