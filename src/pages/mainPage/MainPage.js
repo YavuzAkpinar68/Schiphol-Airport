@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
-import { SafeAreaView, Text, FlatList, ActivityIndicator, View } from "react-native";
+import { SafeAreaView, Text, FlatList, ActivityIndicator, View, ImageBackground } from "react-native";
 import Button from "../../components/button/Button";
 import MainPageCard from "../../components/cards/mainPageCard/MainPageCard";
 import Input from "../../components/input/Input";
@@ -34,32 +34,33 @@ const MainPage = () => {
     }
   }
 
-  const source = flyDirection ? data.filter(a => a.flightDirection.includes(flyDirection.slice(0,1))) : data
+  const source = flyDirection ? data.filter(a => a.flightDirection.includes(flyDirection.slice(0, 1))) : data
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.dateView}>
-        <Input title="Please write fly date as YYYY-MM-DD" placeholder="fly date" onChangeText={setSchedule} />
-        <Button title="Search" onPress={handleSchedule} />
-      </View>
-      <View style={styles.timeView}>
-        <Input title="Please write fly hour as HH" placeholder="fly hour" onChangeText={setHour} />
-        <Input title="Please write fly minute as MM" placeholder="fly minute" onChangeText={setMinute} />
-      </View>
-      <View style={styles.directionView}>
-        <Text>Choose A Flight Direction</Text>
-        {directions.map((direction, index) => {
-          return (
-            <Button theme="directionButton" key={index} title={direction}  onPress={handleDirections} />
-          )
-        })}
-      </View>
-      {
-        loading ?
-          <ActivityIndicator />
-          : <FlatList data={flyDirection ==='All' ? data : source} renderItem={handleRender} />
+      <ImageBackground style={styles.container} source={{uri:'https://w.wallhaven.cc/full/95/wallhaven-95y7v8.jpg'}}>
+        <View style={styles.dateView}>
+          <Input title="Please write fly date as YYYY-MM-DD" placeholder="fly date" onChangeText={setSchedule} />
+          <Button title="Search" onPress={handleSchedule} />
+        </View>
+        <View style={styles.timeView}>
+          <Input title="Please write fly hour as HH" placeholder="fly hour" onChangeText={setHour} />
+          <Input title="Please write fly minute as MM" placeholder="fly minute" onChangeText={setMinute} />
+        </View>
+        <View style={styles.directionView}>
+          {directions.map((direction, index) => {
+            return (
+              <Button theme="directionButton" key={index} title={direction} onPress={handleDirections} />
+            )
+          })}
+        </View>
+        {
+          loading ?
+            <ActivityIndicator />
+            : <FlatList data={flyDirection === 'All' ? data : source} renderItem={handleRender} />
 
-      }
+        }
+      </ImageBackground>
     </SafeAreaView>
   )
 }

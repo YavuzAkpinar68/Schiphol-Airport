@@ -18,7 +18,11 @@ const styles = {
     container:{
       backgroundColor:"silver",
       margin:10,
-      padding:10
+      padding:10,
+      borderRadius:360,
+      flex:1,
+      alignItems:"center",
+      borderWidth:2
     },
 
   })
