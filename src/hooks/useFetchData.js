@@ -3,6 +3,8 @@ import axios from "axios"
 
 const useFetchData = (schedule,button, time) => {
   const [data, setData] = useState([])
+  const [loading, setLoading] = useState(true)
+
   const config = {
     "accept": "application/json",
     "app_id": "d3278977",
@@ -17,13 +19,15 @@ const useFetchData = (schedule,button, time) => {
       console.log(response.data.flights)
     } catch (error) {
       console.log(error)
+    } finally {
+      setLoading(false)
     }
   }
 
   useEffect(() => {
     fetchData()
   }, [button])
-  return {data}
+  return {data, loading}
 }
 
 export default useFetchData

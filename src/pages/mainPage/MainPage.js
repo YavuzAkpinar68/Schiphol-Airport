@@ -10,7 +10,7 @@ const MainPage = () => {
   const [hour, setHour] = useState('')
   const [minute, setMinute] = useState('')
   const [buttonSignal, setButtonSignal] = useState(false)
-  const { data } = useFetchData(schedule, buttonSignal, hour)
+  const { data, loading } = useFetchData(schedule, buttonSignal, hour)
   const navigation = useNavigation()
 
   const handleRender = ({ item }) => (
@@ -33,9 +33,10 @@ const MainPage = () => {
       <Input title="Please write fly minute as MM" placeholder="fly minute" onChangeText={setMinute} />
       <Button title="a" onPress={handleSchedule}></Button>
       {
-        data ?
-          <FlatList data={data} renderItem={handleRender} />
-          : <ActivityIndicator />
+        loading ?
+          <ActivityIndicator />
+          : <FlatList data={data} renderItem={handleRender} />
+
       }
     </SafeAreaView>
   )
