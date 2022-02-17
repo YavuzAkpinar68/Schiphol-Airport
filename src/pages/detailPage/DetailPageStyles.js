@@ -6,7 +6,12 @@ const styles = StyleSheet.create({
   },
   innerContainer:{
     backgroundColor:"#000000b0",
-    flex:1
+    flex:1,
+  },
+  bottomContainer:{
+    flex:1,
+    justifyContent:"flex-end",
+    flexDirection:"column-reverse"
   }
 })
 
