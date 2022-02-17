@@ -1,21 +1,29 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
-import { SafeAreaView, Text, FlatList, Button, ActivityIndicator } from "react-native";
+import { SafeAreaView, Text, FlatList, ActivityIndicator, View } from "react-native";
+import Button from "../../components/button/Button";
 import MainPageCard from "../../components/cards/mainPageCard/MainPageCard";
 import Input from "../../components/input/Input";
 import useFetchData from '../../hooks/useFetchData';
+import styles from "./MainPageStyles";
+import directions from '../../json/directions.json'
 
 const MainPage = () => {
   const [schedule, setSchedule] = useState('')
   const [hour, setHour] = useState('')
   const [minute, setMinute] = useState('')
   const [buttonSignal, setButtonSignal] = useState(false)
+  const [flyDirection, setFlyDirection] = useState('')
   const { data, loading } = useFetchData(schedule, buttonSignal, hour)
   const navigation = useNavigation()
 
   const handleRender = ({ item }) => (
     <MainPageCard item={item} onPress={() => navigation.navigate('DetailPage', { item: item })} />
   )
+
+  const handleDirections = (direction) => {
+    setFlyDirection(direction)
+  }
 
   const handleSchedule = () => {
     setSchedule(`scheduleDate=${schedule}`)
@@ -26,16 +34,30 @@ const MainPage = () => {
     }
   }
 
+  const source = flyDirection ? data.filter(a => a.flightDirection.includes(flyDirection.slice(0,1))) : data
+
   return (
-    <SafeAreaView>
-      <Input title="Please write fly date as YYYY-MM-DD" placeholder="fly date" onChangeText={setSchedule} />
-      <Input title="Please write fly hour as HH" placeholder="fly hour" onChangeText={setHour} />
-      <Input title="Please write fly minute as MM" placeholder="fly minute" onChangeText={setMinute} />
-      <Button title="a" onPress={handleSchedule}></Button>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.dateView}>
+        <Input title="Please write fly date as YYYY-MM-DD" placeholder="fly date" onChangeText={setSchedule} />
+        <Button title="Search" onPress={handleSchedule} />
+      </View>
+      <View style={styles.timeView}>
+        <Input title="Please write fly hour as HH" placeholder="fly hour" onChangeText={setHour} />
+        <Input title="Please write fly minute as MM" placeholder="fly minute" onChangeText={setMinute} />
+      </View>
+      <View style={styles.directionView}>
+        <Text>Choose A Flight Direction</Text>
+        {directions.map((direction, index) => {
+          return (
+            <Button theme="directionButton" key={index} title={direction}  onPress={handleDirections} />
+          )
+        })}
+      </View>
       {
         loading ?
           <ActivityIndicator />
-          : <FlatList data={data} renderItem={handleRender} />
+          : <FlatList data={flyDirection ==='All' ? data : source} renderItem={handleRender} />
 
       }
     </SafeAreaView>
