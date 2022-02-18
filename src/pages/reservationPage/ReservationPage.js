@@ -1,10 +1,13 @@
-import React from "react"
-import { SafeAreaView, Text } from "react-native"
+import React, { useContext } from "react"
+import { FlatList, SafeAreaView, Text } from "react-native"
+import { ReservationContext } from "../../context/ReservationProvider"
 
 const ReservationPage = () => {
+  const {state} = useContext(ReservationContext)
+  console.log(state)
   return(
     <SafeAreaView>
-      <Text>Reservation</Text>
+      <FlatList data={state.Reservations} renderItem={({item}) => <Text>{item.flightName} </Text>}/>
     </SafeAreaView>
   )
 }
