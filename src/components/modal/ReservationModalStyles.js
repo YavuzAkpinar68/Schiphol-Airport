@@ -6,7 +6,9 @@ const styles = StyleSheet.create({
     backgroundColor:"white",
     borderTopLeftRadius:20,
     borderTopRightRadius:20,
-    padding:30
+    padding:30,
+    flexDirection:"row",
+    justifyContent:"center"
   },
   modal:{
     marginTop:10,
@@ -15,6 +17,9 @@ const styles = StyleSheet.create({
     flex:1,
     backgroundColor:"#000000b0",
     justifyContent:"flex-end"
+  },
+  contentContainer:{
+    alignItems:"center"
   }
 })
 
