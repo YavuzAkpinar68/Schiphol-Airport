@@ -14,7 +14,7 @@ const DetailPage = () => {
   const [isVisible, setIsVisible] = useState(false)
   console.log(new Date(data.scheduleDateTime).getTime())
 
-  const handle = () => {
+  const handleSeatSelection = () => {
     data.flightDirection === "D" ?
       new Date(data.scheduleDateTime).getTime() > new Date().getTime()
         ? setIsVisible(true)
@@ -43,7 +43,7 @@ const DetailPage = () => {
           <Text>Aircraft Type : {data.aircraftType.iataMain}{data.aircraftType.iataSub}</Text>
           <Text>Aircraft Registration : {data.aircraftRegistration}</Text>
           <Text>Destinastions : {data.route.destinations}</Text>
-          <Button title="Reserve" onPress={handle} />
+          <Button title="Reserve" onPress={handleSeatSelection} />
         </View>
         {
           isVisible && <View style={styles.bottomContainer}>

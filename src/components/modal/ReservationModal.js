@@ -4,13 +4,13 @@ import Button from "../button/Button";
 import ModalCard from "../cards/modalCard/ModalCard";
 import styles from "./ReservationModalStyles";
 
-const ReservationModal = ({ onClose }) => {
+const ReservationModal = ({ onClose, addReservation }) => {
   const [selected, setSelected] = useState([])
   const [selectedSeat, setSelectedSeat] = useState("")
   const [selectedSeatNumber, setSelectedSeatNumber] = useState()
   const number = []
   const seat = ["A", "B", "C", "D", "E", "F"]
-  for (var i = 1; i <= 50; i++) {
+  for (let i = 1; i <= 50; i++) {
     number.push(i)
   }
 
@@ -53,7 +53,7 @@ const ReservationModal = ({ onClose }) => {
             data={number}
             renderItem={handleRender}
           />
-          <Button title={"a"} onPress={() => console.log(selectedSeat, selectedSeatNumber)} />
+          <Button title={"a"} onPress={addReservation} />
           <FlatList
             ListHeaderComponent={<Text>Seat</Text>}
             contentContainerStyle={styles.contentContainer}

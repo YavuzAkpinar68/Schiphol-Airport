@@ -7,7 +7,7 @@ const styles = {
       justifyContent: "center",
       margin: 5,
       borderRadius: 20,
-      flex: 1,
+      flex: 0.5,
       alignItems: "center"
     },
     title: {
