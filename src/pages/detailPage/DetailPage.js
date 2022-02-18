@@ -1,14 +1,16 @@
 import { useRoute } from "@react-navigation/native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Alert, ImageBackground, SafeAreaView, Text, View } from "react-native";
 import Button from "../../components/button/Button";
 import ReservationModal from "../../components/modal/ReservationModal";
+import { ReservationContext } from "../../context/ReservationProvider";
 import styles from "./DetailPageStyles";
 
 const DetailPage = () => {
   const route = useRoute()
   const data = route.params.item
   const today = new Date()
+  const {state, dispatch} = useContext(ReservationContext)
   const [isVisible, setIsVisible] = useState(false)
   console.log(new Date(data.scheduleDateTime).getTime())
 
@@ -18,6 +20,11 @@ const DetailPage = () => {
         ? setIsVisible(true)
         : Alert.alert("time Flights can be reserved")
       : Alert.alert("Only Departure Flights can be reserved")
+  }
+
+  const handleAddReservation = async (flight) => {
+    dispatch({type:'ADD_RESERVATIONS', payload:{flight}})
+    console.log(state)
   }
 
   return (
@@ -40,7 +47,7 @@ const DetailPage = () => {
         </View>
         {
           isVisible && <View style={styles.bottomContainer}>
-            <ReservationModal onClose={() => setIsVisible(false)} />
+            <ReservationModal addReservation={() => handleAddReservation(data)} onClose={() => setIsVisible(false)} />
           </View>
         }
 
