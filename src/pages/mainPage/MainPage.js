@@ -27,7 +27,7 @@ const MainPage = () => {
 
   const handleSchedule = () => {
     setSchedule(`scheduleDate=${schedule}`)
-    setHour(`&scheduleTime=${hour}%3A${minute}`)
+    hour ? setHour(`&scheduleTime=${hour}%3A${minute}`) : setHour('')
     setButtonSignal(true)
     if (buttonSignal) {
       setButtonSignal(false)
@@ -38,7 +38,7 @@ const MainPage = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ImageBackground style={styles.container} source={{uri:'https://w.wallhaven.cc/full/95/wallhaven-95y7v8.jpg'}}>
+      <ImageBackground style={styles.container} source={{ uri: 'https://w.wallhaven.cc/full/95/wallhaven-95y7v8.jpg' }}>
         <View style={styles.dateView}>
           <Input title="Please write fly date as YYYY-MM-DD" placeholder="fly date" onChangeText={setSchedule} />
           <Button title="Search" onPress={handleSchedule} />
@@ -58,7 +58,6 @@ const MainPage = () => {
           loading ?
             <ActivityIndicator />
             : <FlatList data={flyDirection === 'All' ? data : source} renderItem={handleRender} />
-
         }
       </ImageBackground>
     </SafeAreaView>
