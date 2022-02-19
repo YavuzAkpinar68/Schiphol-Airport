@@ -7,7 +7,7 @@ const ReservationPage = () => {
   console.log(state)
   return(
     <SafeAreaView>
-      <FlatList data={state.Reservations} renderItem={({item}) => <Text>{item.flightName} </Text>}/>
+      <FlatList data={state.Reservations} renderItem={({item}) => <Text>{item.flightName} {item.selectedSeatNumber}</Text>}/>
     </SafeAreaView>
   )
 }

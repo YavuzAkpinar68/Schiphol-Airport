@@ -14,6 +14,14 @@ const reducer = (state, action) => {
       const updatedReservations = [...state.Reservations, selectedFlight]
       return {...state, Reservations:updatedReservations}
     }
+    case 'SELECT_SEAT' : {
+      const selectedSeat = action.payload.seat
+      
+      
+
+      const updatedSeats = state.Seats.push(selectedSeat)
+      return {...state, Seats:updatedSeats}
+    }
   }
 }
 

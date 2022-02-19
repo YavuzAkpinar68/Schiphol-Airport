@@ -1,5 +1,5 @@
 import { useRoute } from "@react-navigation/native";
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { Alert, ImageBackground, SafeAreaView, Text, View } from "react-native";
 import Button from "../../components/button/Button";
 import ReservationModal from "../../components/modal/ReservationModal";
@@ -9,11 +9,9 @@ import styles from "./DetailPageStyles";
 const DetailPage = () => {
   const route = useRoute()
   const data = route.params.item
-  const today = new Date()
-  const {state, dispatch} = useContext(ReservationContext)
+  const { state, dispatch } = useContext(ReservationContext)
   const [isVisible, setIsVisible] = useState(false)
-  const [seatData, setSeatData] = useState()
-  console.log(new Date(data.scheduleDateTime).getTime())
+  const seatData = useRef(null)
 
   const handleSeatSelection = () => {
     data.flightDirection === "D" ?
@@ -24,12 +22,17 @@ const DetailPage = () => {
   }
 
   const handleAddReservation = async (flight) => {
-    dispatch({type:'ADD_RESERVATIONS', payload:{flight}})
-    console.log(state.Reservations[0])
+    dispatch({ type: 'ADD_RESERVATIONS', payload: { flight } })
+    try {
+      await Object.assign(data, seatData.current)
+
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  const handleSeatData = (selectedSeat, selectedSeatNumber) => {
-    setSeatData(selectedSeat, selectedSeatNumber)
+  const handleSeatData = async (selectedSeat, selectedSeatNumber) => {
+    seatData.current = { selectedSeat: selectedSeat, selectedSeatNumber: selectedSeatNumber }
     console.log(seatData)
   }
 
@@ -53,10 +56,13 @@ const DetailPage = () => {
         </View>
         {
           isVisible && <View style={styles.bottomContainer}>
-            <ReservationModal sendData={handleSeatData} addReservation={() => handleAddReservation(data)} onClose={() => setIsVisible(false)} />
+            <ReservationModal
+              sendData={handleSeatData}
+              addReservation={() => handleAddReservation(data)}
+              onClose={() => setIsVisible(false)}
+            />
           </View>
         }
-
       </ImageBackground>
     </SafeAreaView>
   )

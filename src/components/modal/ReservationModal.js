@@ -6,7 +6,6 @@ import ModalCard from "../cards/modalCard/ModalCard";
 import styles from "./ReservationModalStyles";
 
 const ReservationModal = ({ onClose, addReservation, sendData }) => {
-  const {state} = useContext(ReservationContext)
   const [selected, setSelected] = useState([])
   const [selectedSeat, setSelectedSeat] = useState("")
   const [selectedSeatNumber, setSelectedSeatNumber] = useState()
