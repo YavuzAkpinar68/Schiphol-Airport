@@ -3,6 +3,7 @@ import React from "react"
 import DetailPage from "../pages/detailPage/DetailPage"
 import MainPage from "../pages/mainPage/MainPage"
 import Icon from "react-native-vector-icons/Ionicons"
+import ReservationPage from "../pages/reservationPage/ReservationPage"
 
 const Stack = createNativeStackNavigator()
 
@@ -11,6 +12,7 @@ const StackScreens = () => {
     <Stack.Navigator screenOptions={{headerShown:false}}>
       <Stack.Screen name="MainPage" component={MainPage} />
       <Stack.Screen name="DetailPage" component={DetailPage} />
+      <Stack.Screen name="ReservationPage" component={ReservationPage}/>
     </Stack.Navigator>
   )
 }

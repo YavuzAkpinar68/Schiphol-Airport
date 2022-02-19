@@ -52,6 +52,10 @@ const DetailPage = () => {
           <Text>Aircraft Type : {data.aircraftType.iataMain}{data.aircraftType.iataSub}</Text>
           <Text>Aircraft Registration : {data.aircraftRegistration}</Text>
           <Text>Destinastions : {data.route.destinations}</Text>
+          {
+            data.selectedSeatNumber &&
+            <Text>Reservation Seat : {data.selectedSeatNumber} {data.selectedSeat}</Text>
+          }
           <Button title="Reserve" onPress={handleSeatSelection} />
         </View>
         {
