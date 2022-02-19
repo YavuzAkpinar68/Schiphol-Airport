@@ -9,7 +9,7 @@ const ReservationPage = () => {
   const navigation = useNavigation()
   console.log(state)
 
-  const handleRender = ({item}) => (
+  const handleRender = ({item, index}) => (
     <ReserVationCard item={item} onPress={() => navigation.navigate('DetailPage', {item:item})}/>
   )
 
@@ -17,7 +17,7 @@ const ReservationPage = () => {
   
   return(
     <SafeAreaView>
-      <FlatList keyExtractor={(index) => String(index)} data={state.Reservations} renderItem={handleRender}/>
+      <FlatList keyExtractor={(item, index) => String(index)} data={state.Reservations} renderItem={handleRender}/>
     </SafeAreaView>
   )
 }

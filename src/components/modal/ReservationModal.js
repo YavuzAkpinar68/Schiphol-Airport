@@ -53,7 +53,7 @@ const ReservationModal = ({ onClose, addReservation, sendData }) => {
             data={number}
             renderItem={handleRender}
           />
-          <Button title={"a"} onPress={() => addReservation(sendData(selectedSeat, selectedSeatNumber))} />
+          <Button title={"a"} onPress={(flight) => addReservation(sendData(selectedSeat, selectedSeatNumber), flight)} />
           <FlatList
             ListHeaderComponent={<Text>Seat</Text>}
             contentContainerStyle={styles.contentContainer}

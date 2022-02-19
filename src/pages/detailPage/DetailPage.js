@@ -69,7 +69,7 @@ const DetailPage = () => {
           isVisible && <View style={styles.bottomContainer}>
             <ReservationModal
               sendData={handleSeatData}
-              addReservation={() => handleAddReservation(flight)}
+              addReservation={(flight) => handleAddReservation(flight)}
               onClose={() => setIsVisible(false)}
             />
           </View>
