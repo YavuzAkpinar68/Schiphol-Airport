@@ -17,7 +17,7 @@ const ReservationPage = () => {
   
   return(
     <SafeAreaView>
-      <FlatList data={state.Reservations} renderItem={handleRender}/>
+      <FlatList keyExtractor={(index) => String(index)} data={state.Reservations} renderItem={handleRender}/>
     </SafeAreaView>
   )
 }

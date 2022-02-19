@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import axios from "axios"
+import { ReservationContext } from "../context/ReservationProvider"
 
 const useFetchData = (schedule,button, time) => {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
+  const {state} = useContext(ReservationContext)
 
   const config = {
     "accept": "application/json",
@@ -16,7 +18,6 @@ const useFetchData = (schedule,button, time) => {
     try {
       const response = await axios.get(`https://api.schiphol.nl/public-flights/flights?${schedule}${time}&includedelays=false&page=0&sort=%2BscheduleTime`, { headers: config })
       setData(response.data.flights)
-      console.log(response.data.flights)
     } catch (error) {
       console.log(error)
     } finally {
@@ -26,7 +27,7 @@ const useFetchData = (schedule,button, time) => {
 
   useEffect(() => {
     fetchData()
-  }, [button])
+  }, [button, state])
   return {data, loading}
 }
 

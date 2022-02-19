@@ -1,4 +1,4 @@
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import React, { useContext, useRef, useState } from "react";
 import { Alert, ImageBackground, SafeAreaView, Text, View } from "react-native";
 import Button from "../../components/button/Button";
@@ -9,9 +9,10 @@ import styles from "./DetailPageStyles";
 const DetailPage = () => {
   const route = useRoute()
   const data = route.params.item
-  const { state, dispatch } = useContext(ReservationContext)
+  const { dispatch } = useContext(ReservationContext)
   const [isVisible, setIsVisible] = useState(false)
   const seatData = useRef(null)
+  const navigation = useNavigation()
 
   const handleSeatSelection = () => {
     data.flightDirection === "D" ?
@@ -21,19 +22,21 @@ const DetailPage = () => {
       : Alert.alert("Only Departure Flights can be reserved")
   }
 
-  const handleAddReservation = async (flight) => {
-    dispatch({ type: 'ADD_RESERVATIONS', payload: { flight } })
-    try {
-      await Object.assign(data, seatData.current)
-
-    } catch (error) {
-      console.log(error)
-    }
+  const handleAddReservation =() => {
+    const flight = Object.assign(data, seatData.current)
+    dispatch({ type: 'ADD_RESERVATIONS', payload: { flight:flight } })
+    navigation.navigate('MainPage')
   }
 
   const handleSeatData = async (selectedSeat, selectedSeatNumber) => {
-    seatData.current = { selectedSeat: selectedSeat, selectedSeatNumber: selectedSeatNumber }
-    console.log(seatData)
+    let seatId = Math.random()
+    console.log(seatId)
+    seatData.current = { selectedSeat: selectedSeat, selectedSeatNumber: selectedSeatNumber, seatId:seatId }
+  }
+
+  const handleRemove = (flight) => {
+    dispatch({type:'REMOVE_RESERVATION', payload:{flight}})
+    navigation.navigate('MainPage')
   }
 
   return (
@@ -54,15 +57,19 @@ const DetailPage = () => {
           <Text>Destinastions : {data.route.destinations}</Text>
           {
             data.selectedSeatNumber &&
-            <Text>Reservation Seat : {data.selectedSeatNumber} {data.selectedSeat}</Text>
+            <View>
+              <Text>Reservation Seat : {data.selectedSeatNumber} {data.selectedSeat}</Text>
+              
+            </View>
           }
+          <Button title={"remove"} onPress={() => handleRemove(data)}/>
           <Button title="Reserve" onPress={handleSeatSelection} />
         </View>
         {
           isVisible && <View style={styles.bottomContainer}>
             <ReservationModal
               sendData={handleSeatData}
-              addReservation={() => handleAddReservation(data)}
+              addReservation={() => handleAddReservation(flight)}
               onClose={() => setIsVisible(false)}
             />
           </View>
