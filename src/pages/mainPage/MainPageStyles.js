@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
   },
   dateView:{
     flexDirection:"row",
+    justifyContent:"space-between"
   },
   timeView:{
     flexDirection:"row",

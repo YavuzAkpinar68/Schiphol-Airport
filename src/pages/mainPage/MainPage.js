@@ -17,6 +17,7 @@ const MainPage = () => {
   const { data, loading } = useFetchData(schedule, buttonSignal, hour)
   const navigation = useNavigation()
 
+
   const handleRender = ({ item }) => (
     <MainPageCard item={item} onPress={() => navigation.navigate('DetailPage', { item: item })} />
   )
@@ -41,7 +42,7 @@ const MainPage = () => {
       <ImageBackground style={styles.container} source={{ uri: 'https://w.wallhaven.cc/full/95/wallhaven-95y7v8.jpg' }}>
         <View style={styles.dateView}>
           <Input title="Please write fly date as YYYY-MM-DD" placeholder="fly date" onChangeText={setSchedule} />
-          <Button title="Search" onPress={handleSchedule} />
+          <Button iconName="search" iconSize={30} onPress={handleSchedule} />
         </View>
         <View style={styles.timeView}>
           <Input title="Please write fly hour as HH" placeholder="fly hour" onChangeText={setHour} />

@@ -3,12 +3,10 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container:{
     flex:0.5,
-    backgroundColor:"white",
+    backgroundColor:"wheat",
     borderTopLeftRadius:20,
     borderTopRightRadius:20,
     padding:30,
-    flexDirection:"row",
-    justifyContent:"center"
   },
   modal:{
     marginTop:10,
@@ -19,7 +17,17 @@ const styles = StyleSheet.create({
     justifyContent:"flex-end"
   },
   contentContainer:{
-    alignItems:"center"
+    alignItems:"center",
+    borderRightWidth:1
+  },
+  title:{
+    color:"silver",
+    textAlign:"center",
+    fontSize:25
+  },
+  innerContainer:{
+    flexDirection:"row",
+    justifyContent:"center"
   }
 })
 

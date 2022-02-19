@@ -22,20 +22,20 @@ const DetailPage = () => {
       : Alert.alert("Only Departure Flights can be reserved")
   }
 
-  const handleAddReservation =() => {
+  const handleAddReservation = () => {
     const flight = Object.assign(data, seatData.current)
-    dispatch({ type: 'ADD_RESERVATIONS', payload: { flight:flight } })
+    dispatch({ type: 'ADD_RESERVATIONS', payload: { flight: flight } })
     navigation.navigate('MainPage')
   }
 
   const handleSeatData = async (selectedSeat, selectedSeatNumber) => {
     let seatId = Math.random()
     console.log(seatId)
-    seatData.current = { selectedSeat: selectedSeat, selectedSeatNumber: selectedSeatNumber, seatId:seatId }
+    seatData.current = { selectedSeat: selectedSeat, selectedSeatNumber: selectedSeatNumber, seatId: seatId }
   }
 
   const handleRemove = (flight) => {
-    dispatch({type:'REMOVE_RESERVATION', payload:{flight}})
+    dispatch({ type: 'REMOVE_RESERVATION', payload: { flight } })
     navigation.navigate('MainPage')
   }
 
@@ -45,25 +45,27 @@ const DetailPage = () => {
         source={{ uri: "https://w.wallhaven.cc/full/73/wallhaven-7379de.jpg" }}
         style={styles.container}>
         <View style={styles.innerContainer}>
-          <Text>Flight Name : {data.flightName}</Text>
-          <Text>Schedule Date : {data.scheduleDate}</Text>
-          <Text>Schedule Time : {data.scheduleTime}</Text>
-          <Text>Flight Direction : {data.flightDirection}</Text>
-          <Text>Id : {data.id}</Text>
-          <Text>Service Type :  {data.serviceType}</Text>
-          <Text>Terminal : {data.terminal}</Text>
-          <Text>Aircraft Type : {data.aircraftType.iataMain}{data.aircraftType.iataSub}</Text>
-          <Text>Aircraft Registration : {data.aircraftRegistration}</Text>
-          <Text>Destinastions : {data.route.destinations}</Text>
+          <Text style={styles.text}>Flight Name : {data.flightName}</Text>
+          <Text style={styles.text}>Schedule Date : {data.scheduleDate}</Text>
+          <Text style={styles.text}>Schedule Time : {data.scheduleTime}</Text>
+          <Text style={styles.text}>Flight Direction : {data.flightDirection}</Text>
+          <Text style={styles.text}>Id : {data.id}</Text>
+          <Text style={styles.text}>Service Type :  {data.serviceType}</Text>
+          <Text style={styles.text}>Terminal : {data.terminal}</Text>
+          <Text style={styles.text}>Aircraft Type : {data.aircraftType.iataMain}{data.aircraftType.iataSub}</Text>
+          <Text style={styles.text}>Aircraft Registration : {data.aircraftRegistration}</Text>
+          <Text style={styles.text}>Destinastions : {data.route.destinations}</Text>
           {
             data.selectedSeatNumber &&
-            <View>
-              <Text>Reservation Seat : {data.selectedSeatNumber} {data.selectedSeat}</Text>
-              
-            </View>
+            <Text style={styles.text}>Reservation Seat : {data.selectedSeatNumber} {data.selectedSeat}</Text>
           }
-          <Button title={"remove"} onPress={() => handleRemove(data)}/>
-          <Button title="Reserve" onPress={handleSeatSelection} />
+        </View>
+        <View style={styles.buttonContainer}>
+          {
+            data.selectedSeatNumber &&
+            <Button theme="reservationButton" title="Remove Reservation" onPress={() => handleRemove(data)} />
+          }
+          <Button theme="reservationButton" title="Reserve" onPress={handleSeatSelection} />
         </View>
         {
           isVisible && <View style={styles.bottomContainer}>

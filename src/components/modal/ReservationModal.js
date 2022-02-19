@@ -47,19 +47,26 @@ const ReservationModal = ({ onClose, addReservation, sendData }) => {
       transparent={true}>
       <View style={styles.outerContainer}>
         <View style={styles.container}>
-          <FlatList
-            ListHeaderComponent={<Text>Chose your</Text>}
-            contentContainerStyle={styles.contentContainer}
-            data={number}
-            renderItem={handleRender}
+          <Text style={styles.title}>Chosee your seat</Text>
+          <Button
+            theme="reservationButton"
+            title="Reserve"
+            onPress={(flight) => addReservation(sendData(selectedSeat, selectedSeatNumber), flight)}
           />
-          <Button title={"a"} onPress={(flight) => addReservation(sendData(selectedSeat, selectedSeatNumber), flight)} />
-          <FlatList
-            ListHeaderComponent={<Text>Seat</Text>}
-            contentContainerStyle={styles.contentContainer}
-            data={seat}
-            renderItem={handleRender}
-          />
+          <View style={styles.innerContainer}>
+            <FlatList
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={styles.contentContainer}
+              data={number}
+              renderItem={handleRender}
+            />
+            <FlatList
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={styles.contentContainer}
+              data={seat}
+              renderItem={handleRender}
+            />
+          </View>
         </View>
       </View>
     </Modal>

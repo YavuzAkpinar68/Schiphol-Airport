@@ -8,20 +8,20 @@ const Tab = createBottomTabNavigator()
 
 const TabStack = () => {
   return (
-    <Tab.Navigator screenOptions={{
+    <Tab.Navigator screenOptions={{tabBarStyle:{backgroundColor:"wheat"},headerStyle:{backgroundColor:"wheat"},
       tabBarShowLabel: false, headerTitleAlign: "center"
       , headerTitle: () => (
-        <Icon name="airplane" size={30} color="blue" />
+        <Icon name="airplane" size={35} color="olive" />
       )
     }}>
-      <Tab.Screen options={{
-        tabBarIcon: () => (
-          <Icon name="home" size={20} color="red" />
+      <Tab.Screen options={{tabBarInactiveTintColor:"silver",tabBarActiveTintColor:"olive",
+        tabBarIcon: ({color}) => (
+          <Icon name="home" size={30} color={color} />
         )
       }} name="StackScreens" component={StackScreens} />
-      <Tab.Screen options={{
-        tabBarIcon: () => (
-          <Icon name="pencil" size={20} color="red"/>
+      <Tab.Screen options={{tabBarInactiveTintColor:"silver",tabBarActiveTintColor:"olive",
+        tabBarIcon: ({color}) => (
+          <Icon name="pencil" size={30} color={color}/>
         )
       }} name="ReservationPage" component={ReservationPage} />
     </Tab.Navigator>

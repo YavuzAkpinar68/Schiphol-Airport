@@ -3,11 +3,10 @@ import { StyleSheet } from "react-native";
 const styles = {
   seacrhButton: StyleSheet.create({
     container: {
-      backgroundColor: "silver",
       justifyContent: "center",
       margin: 5,
       borderRadius: 20,
-      flex: 0.5,
+      flex: 1,
       alignItems: "center"
     },
     title: {
@@ -16,7 +15,6 @@ const styles = {
   }),
   directionButton: StyleSheet.create({
     container:{
-      backgroundColor:"silver",
       margin:10,
       padding:10,
       borderRadius:360,
@@ -24,7 +22,22 @@ const styles = {
       alignItems:"center",
       borderWidth:2
     },
-
+  }),
+  reservationButton: StyleSheet.create({
+    container:{
+      margin:10,
+      padding:10,
+      borderRadius:360,
+      alignItems:"center",
+      borderWidth:2,
+      justifyContent:"center",
+      backgroundColor:"olive"
+    },
+    title:{
+      color:"silver",
+      fontSize:18,
+      fontWeight:"900"
+    }
   })
 
 }
