@@ -12,6 +12,7 @@ const DetailPage = () => {
   const today = new Date()
   const {state, dispatch} = useContext(ReservationContext)
   const [isVisible, setIsVisible] = useState(false)
+  const [seatData, setSeatData] = useState()
   console.log(new Date(data.scheduleDateTime).getTime())
 
   const handleSeatSelection = () => {
@@ -24,7 +25,12 @@ const DetailPage = () => {
 
   const handleAddReservation = async (flight) => {
     dispatch({type:'ADD_RESERVATIONS', payload:{flight}})
-    console.log(state)
+    console.log(state.Reservations[0])
+  }
+
+  const handleSeatData = (selectedSeat, selectedSeatNumber) => {
+    setSeatData(selectedSeat, selectedSeatNumber)
+    console.log(seatData)
   }
 
   return (
@@ -47,7 +53,7 @@ const DetailPage = () => {
         </View>
         {
           isVisible && <View style={styles.bottomContainer}>
-            <ReservationModal addReservation={() => handleAddReservation(data)} onClose={() => setIsVisible(false)} />
+            <ReservationModal sendData={handleSeatData} addReservation={() => handleAddReservation(data)} onClose={() => setIsVisible(false)} />
           </View>
         }
 

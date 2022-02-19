@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Modal, View, Text, FlatList } from "react-native";
+import { ReservationContext } from "../../context/ReservationProvider";
 import Button from "../button/Button";
 import ModalCard from "../cards/modalCard/ModalCard";
 import styles from "./ReservationModalStyles";
 
-const ReservationModal = ({ onClose, addReservation }) => {
+const ReservationModal = ({ onClose, addReservation, sendData }) => {
+  const {state} = useContext(ReservationContext)
   const [selected, setSelected] = useState([])
   const [selectedSeat, setSelectedSeat] = useState("")
   const [selectedSeatNumber, setSelectedSeatNumber] = useState()
@@ -36,7 +38,6 @@ const ReservationModal = ({ onClose, addReservation }) => {
         setSelectedSeat(item)
       }
     }
-    console.log('seat', selectedSeat, selectedSeatNumber)
   }
 
   return (
@@ -53,7 +54,7 @@ const ReservationModal = ({ onClose, addReservation }) => {
             data={number}
             renderItem={handleRender}
           />
-          <Button title={"a"} onPress={addReservation} />
+          <Button title={"a"} onPress={() => addReservation(sendData(selectedSeat, selectedSeatNumber))} />
           <FlatList
             ListHeaderComponent={<Text>Seat</Text>}
             contentContainerStyle={styles.contentContainer}
