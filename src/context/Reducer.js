@@ -10,10 +10,9 @@ const reducer = (state, action) => {
       const selectedFlight = action.payload.flight
 
       const isInReservations = state.Reservations.findIndex(f => f.selectedSeat === selectedFlight.selectedSeat) !== -1
-       && state.Reservations.findIndex(f => f.selectedSeatNumber === selectedFlight.selectedSeatNumber) !== -1
-
+    
       if (isInReservations) {
-
+        if (state.Reservations.findIndex(f => f.selectedSeatNumber === selectedFlight.selectedSeatNumber) !== -1)
         Alert.alert('Seat already Taken ')
         return state
       }
