@@ -8,9 +8,6 @@ const styles = {
       borderRadius: 20,
       flex: 1,
       alignItems: "center"
-    },
-    title: {
-
     }
   }),
   directionButton: StyleSheet.create({
@@ -20,7 +17,8 @@ const styles = {
       borderRadius:360,
       flex:1,
       alignItems:"center",
-      borderWidth:2
+      borderWidth:2,
+      backgroundColor:"#000000a0"
     },
   }),
   reservationButton: StyleSheet.create({

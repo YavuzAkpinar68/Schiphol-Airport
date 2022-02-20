@@ -41,12 +41,12 @@ const MainPage = () => {
     <SafeAreaView style={styles.container}>
       <ImageBackground style={styles.container} source={{ uri: 'https://w.wallhaven.cc/full/95/wallhaven-95y7v8.jpg' }}>
         <View style={styles.dateView}>
-          <Input title="Please write fly date as YYYY-MM-DD" placeholder="fly date" onChangeText={setSchedule} />
+          <Input title="Please write fly date as YYYY-MM-DD" placeholder="Flight date..." onChangeText={setSchedule} />
           <Button iconName="search" iconSize={30} onPress={handleSchedule} />
         </View>
         <View style={styles.timeView}>
-          <Input title="Please write fly hour as HH" placeholder="fly hour" onChangeText={setHour} />
-          <Input title="Please write fly minute as MM" placeholder="fly minute" onChangeText={setMinute} />
+          <Input title="Please write fly hour as HH" placeholder="Flight hour..." onChangeText={setHour} />
+          <Input title="Please write fly minute as MM" placeholder="Flight minute..." onChangeText={setMinute} />
         </View>
         <View style={styles.directionView}>
           {directions.map((direction, index) => {

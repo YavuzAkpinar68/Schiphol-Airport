@@ -25,19 +25,18 @@ const DetailPage = () => {
   }
 
   const handleAddReservation = () => {
-    const dataWithSeat = {...data, ...seatData.current}
+    const dataWithSeat = { ...data, ...seatData.current }
     RNQRGenerator.generate({
-      value: `${data.flightName}, ${data.scheduleDate}, ${data.scheduleTime}, ${data.flightDirection}, ${dataWithSeat.selectedSeatNumber} ${dataWithSeat.selectedSeat}`,
+      value: `${data.flightName}, ${data.scheduleDate}, ${data.scheduleTime}, ${data.flightDirection}, 
+      ${dataWithSeat.selectedSeatNumber} ${dataWithSeat.selectedSeat}`,
       height: 300,
       width: 250,
       base64: true
     }).then((response) => {
       qrCode.current = { qrCode: response.uri }
-      console.log(qrCode)
       const flight = { ...dataWithSeat, ...qrCode.current }
       dispatch({ type: 'ADD_RESERVATIONS', payload: { flight: flight } })
       navigation.navigate('MainPage')
-      console.log('flight', flight)
     })
   }
 
@@ -57,22 +56,31 @@ const DetailPage = () => {
         source={{ uri: "https://w.wallhaven.cc/full/73/wallhaven-7379de.jpg" }}
         style={styles.container}>
         <View style={styles.innerContainer}>
-          <Text style={styles.text}>Flight Name : {data.flightName}</Text>
-          <Text style={styles.text}>Schedule Date : {data.scheduleDate}</Text>
-          <Text style={styles.text}>Schedule Time : {data.scheduleTime}</Text>
-          <Text style={styles.text}>Flight Direction : {data.flightDirection}</Text>
-          <Text style={styles.text}>Id : {data.id}</Text>
-          <Text style={styles.text}>Service Type :  {data.serviceType}</Text>
-          <Text style={styles.text}>Terminal : {data.terminal}</Text>
-          <Text style={styles.text}>Aircraft Type : {data.aircraftType.iataMain}{data.aircraftType.iataSub}</Text>
-          <Text style={styles.text}>Aircraft Registration : {data.aircraftRegistration}</Text>
-          <Text style={styles.text}>Destinastions : {data.route.destinations}</Text>
+          <View style={styles.flightDetailView}>
+            {data.selectedSeat &&
+              <Text style={styles.text}>ReservationDetails</Text>
+            }
+            <Text style={data.selectedSeat ? styles.text : styles.text1}>Flight Name : {data.flightName}</Text>
+            <Text style={data.selectedSeat ? styles.text : styles.text1}>Schedule Date : {data.scheduleDate}</Text>
+            <Text style={data.selectedSeat ? styles.text : styles.text1}>Schedule Time : {data.scheduleTime}</Text>
+            <Text style={data.selectedSeat ? styles.text : styles.text1}>Flight Direction : {data.flightDirection}</Text>
+            <Text style={data.selectedSeat ? styles.text : styles.text1}>Id : {data.id}</Text>
+            <Text style={data.selectedSeat ? styles.text : styles.text1}>Service Type :  {data.serviceType}</Text>
+            <Text style={data.selectedSeat ? styles.text : styles.text1}>Terminal : {data.terminal}</Text>
+            <Text style={data.selectedSeat ? styles.text : styles.text1}>Aircraft Type : {data.aircraftType.iataMain}{data.aircraftType.iataSub}</Text>
+            <Text style={data.selectedSeat ? styles.text : styles.text1}>Aircraft Registration : {data.aircraftRegistration}</Text>
+            <Text style={data.selectedSeat ? styles.text : styles.text1}>Destinastions : {data.route.destinations}</Text>
+            {
+              data.selectedSeatNumber &&
+              <Text style={styles.text}>Reservation Seat : {data.selectedSeatNumber} {data.selectedSeat}</Text>
+            }
+          </View>
           {
-            data.qrCode && <Image source={{uri:data.qrCode}} style={{ height: 150, width: 150 }} />
-          }
-          {
-            data.selectedSeatNumber &&
-            <Text style={styles.text}>Reservation Seat : {data.selectedSeatNumber} {data.selectedSeat}</Text>
+            data.qrCode &&
+            <View style={styles.qrView}>
+              <Text style={styles.text}>QR Code</Text>
+              <Image source={{ uri: data.qrCode }} style={styles.qrImage} />
+            </View>
           }
         </View>
         <View style={styles.buttonContainer}>
