@@ -12,8 +12,6 @@ const ReservationPage = () => {
   const handleRender = ({item, index}) => (
     <ReserVationCard item={item} onPress={() => navigation.navigate('DetailPage', {item:item})}/>
   )
-
-  
   
   return(
     <SafeAreaView>
