@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import styles from "./ReservationCardStyles";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import styles from "./ReservationCardStyles";
 
 const ReserVationCard = ({ item, onPress }) => {
   return (

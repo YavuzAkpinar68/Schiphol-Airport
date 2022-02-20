@@ -1,11 +1,12 @@
 import { useNavigation, useRoute } from "@react-navigation/native";
 import React, { useContext, useRef, useState } from "react";
 import { Alert, ImageBackground, SafeAreaView, Text, View, Image } from "react-native";
+import { ReservationContext } from "../../context/ReservationProvider";
+import RNQRGenerator from "rn-qr-generator";
+
 import Button from "../../components/button/Button";
 import ReservationModal from "../../components/modal/ReservationModal";
-import { ReservationContext } from "../../context/ReservationProvider";
 import styles from "./DetailPageStyles";
-import RNQRGenerator from "rn-qr-generator";
 
 const DetailPage = () => {
   const route = useRoute()
@@ -20,8 +21,8 @@ const DetailPage = () => {
     data.flightDirection === "D" ?
       new Date(data.scheduleDateTime).getTime() > new Date().getTime()
         ? setIsVisible(true)
-        : Alert.alert("time Flights can be reserved")
-      : Alert.alert("Only Departure Flights can be reserved")
+        : Alert.alert("You can only booking future flights")
+      : Alert.alert("Only Departure flights can be booking")
   }
 
   const handleAddReservation = () => {
@@ -63,7 +64,7 @@ const DetailPage = () => {
             <Text style={data.selectedSeat ? styles.text : styles.text1}>Flight Name : {data.flightName}</Text>
             <Text style={data.selectedSeat ? styles.text : styles.text1}>Schedule Date : {data.scheduleDate}</Text>
             <Text style={data.selectedSeat ? styles.text : styles.text1}>Schedule Time : {data.scheduleTime}</Text>
-            <Text style={data.selectedSeat ? styles.text : styles.text1}>Flight Direction : {data.flightDirection}</Text>
+            <Text style={data.selectedSeat ? styles.text : styles.text1}>Flight Direction : {data.flightDirection === 'D' ? 'Departed' : 'Abroad'}</Text>
             <Text style={data.selectedSeat ? styles.text : styles.text1}>Id : {data.id}</Text>
             <Text style={data.selectedSeat ? styles.text : styles.text1}>Service Type :  {data.serviceType}</Text>
             <Text style={data.selectedSeat ? styles.text : styles.text1}>Terminal : {data.terminal}</Text>

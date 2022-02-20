@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
-import { SafeAreaView, Text, FlatList, ActivityIndicator, View, ImageBackground } from "react-native";
+import { SafeAreaView, FlatList, ActivityIndicator, View, ImageBackground } from "react-native";
+
 import Button from "../../components/button/Button";
 import MainPageCard from "../../components/cards/mainPageCard/MainPageCard";
 import Input from "../../components/input/Input";
@@ -13,17 +14,16 @@ const MainPage = () => {
   const [hour, setHour] = useState('')
   const [minute, setMinute] = useState('')
   const [buttonSignal, setButtonSignal] = useState(false)
-  const [flyDirection, setFlyDirection] = useState('')
+  const [flightDirection, setFlightDirection] = useState('')
   const { data, loading } = useFetchData(schedule, buttonSignal, hour)
   const navigation = useNavigation()
-
-
+  
   const handleRender = ({ item }) => (
     <MainPageCard item={item} onPress={() => navigation.navigate('DetailPage', { item: item })} />
   )
 
   const handleDirections = (direction) => {
-    setFlyDirection(direction)
+    setFlightDirection(direction)
   }
 
   const handleSchedule = () => {
@@ -35,7 +35,7 @@ const MainPage = () => {
     }
   }
 
-  const source = flyDirection ? data.filter(a => a.flightDirection.includes(flyDirection.slice(0, 1))) : data
+  const source = flightDirection ? data.filter(a => a.flightDirection.includes(flightDirection.slice(0, 1))) : data
 
   return (
     <SafeAreaView style={styles.container}>
@@ -58,7 +58,7 @@ const MainPage = () => {
         {
           loading ?
             <ActivityIndicator />
-            : <FlatList data={flyDirection === 'All' ? data : source} renderItem={handleRender} />
+            : <FlatList data={flightDirection === 'All' ? data : source} renderItem={handleRender} />
         }
       </ImageBackground>
     </SafeAreaView>

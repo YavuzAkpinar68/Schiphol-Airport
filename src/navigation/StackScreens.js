@@ -1,8 +1,8 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import React from "react"
+
 import DetailPage from "../pages/detailPage/DetailPage"
 import MainPage from "../pages/mainPage/MainPage"
-import Icon from "react-native-vector-icons/Ionicons"
 import ReservationPage from "../pages/reservationPage/ReservationPage"
 
 const Stack = createNativeStackNavigator()

@@ -13,7 +13,7 @@ const MainPageCard = ({ item, onPress }) => {
       <View style={styles.flightDetailView}>
         <Text style={styles.text}>Schedule Date : {item.scheduleDate}</Text>
         <Text style={styles.text}>Schedule Time : {item.scheduleTime}</Text>
-        <Text style={styles.text}>Flight Direction : {item.flightDirection}</Text>
+        <Text style={styles.text}>Flight Direction : {item.flightDirection === 'D' ? 'Departed' : 'Abroad'}</Text>
       </View>
     </TouchableOpacity>
   )

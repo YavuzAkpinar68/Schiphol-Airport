@@ -1,6 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import React from "react"
 import Icon from "react-native-vector-icons/Ionicons"
+
 import QrScannerPage from "../pages/qrScanPage/QrScanPage"
 import ReservationPage from "../pages/reservationPage/ReservationPage"
 import StackScreens from "./StackScreens"

@@ -1,6 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { ImageBackground, SafeAreaView, Text, View } from "react-native";
 import { RNCamera } from 'react-native-camera';
+
 import Button from "../../components/button/Button";
 import styles from "./QrScanPageStyles";
 
@@ -9,8 +10,8 @@ const QrScannerPage = () => {
 
   const handleQr = (barcode) => {
     setQr(barcode.data)
-    console.log(qr)
   }
+
   return (
     <SafeAreaView style={styles.container}>
       {
@@ -31,7 +32,6 @@ const QrScannerPage = () => {
             onBarCodeRead={handleQr}>
           </RNCamera>
       }
-
     </SafeAreaView>
   )
 }

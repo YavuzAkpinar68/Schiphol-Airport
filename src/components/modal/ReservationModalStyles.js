@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   },
   contentContainer:{
     alignItems:"center",
-    borderRightWidth:1
+    borderRightWidth:1,
   },
   title:{
     color:"silver",
@@ -27,7 +27,8 @@ const styles = StyleSheet.create({
   },
   innerContainer:{
     flexDirection:"row",
-    justifyContent:"center"
+    justifyContent:"center",
+    flex:1
   }
 })
 

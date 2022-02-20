@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/native"
 import React, { useContext } from "react"
 import { FlatList, ImageBackground, SafeAreaView, Text } from "react-native"
+
 import ReserVationCard from "../../components/cards/reservationCard/ReservationCard"
 import { ReservationContext } from "../../context/ReservationProvider"
 import styles from "./ReservationPageStyles"
@@ -8,7 +9,6 @@ import styles from "./ReservationPageStyles"
 const ReservationPage = () => {
   const { state } = useContext(ReservationContext)
   const navigation = useNavigation()
-  console.log(state)
 
   const handleRender = ({ item, index }) => (
     <ReserVationCard item={item} onPress={() => navigation.navigate('DetailPage', { item: item })} />

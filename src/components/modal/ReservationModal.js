@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Modal, View, Text, FlatList } from "react-native";
-import { ReservationContext } from "../../context/ReservationProvider";
+
 import Button from "../button/Button";
 import ModalCard from "../cards/modalCard/ModalCard";
 import styles from "./ReservationModalStyles";
@@ -26,11 +26,8 @@ const ReservationModal = ({ onClose, addReservation, sendData }) => {
       let index = selected.findIndex(ind => ind == item)
       setSelected([selected.splice(index, 1), ...selected]);
 
-      console.log('newselected', selected)
     } else {
       setSelected([item, ...selected])
-      console.log('selected', selected)
-      console.log(item)
       if (typeof item == "number") {
         setSelectedSeatNumber(item)
       } else {

@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
     flex:1,
     alignItems:"center",
   },
-
   qrImage:{
     height:Dimensions.get('screen').height /5, 
     width: Dimensions.get('screen').width / 2.5

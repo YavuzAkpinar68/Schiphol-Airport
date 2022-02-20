@@ -13,11 +13,11 @@ const reducer = (state, action) => {
     
       if (isInReservations) {
         if (state.Reservations.findIndex(f => f.selectedSeatNumber === selectedFlight.selectedSeatNumber) !== -1)
-        Alert.alert('Seat already Taken ')
+        Alert.alert('Seat already has rezervation ')
         return state
       }
-      console.log(isInReservations)
       const updatedReservations = [...state.Reservations, selectedFlight]
+      
       AsyncStorage.setItem('@RESERVATIONS', JSON.stringify(updatedReservations))
       return { ...state, Reservations: updatedReservations }
     }
@@ -26,6 +26,7 @@ const reducer = (state, action) => {
 
       const flightIndex = state.Reservations.findIndex(f => f.seatId === selectedFlight.seatId)
       const updatedReservations = [...state.Reservations]
+
       updatedReservations.splice(flightIndex, 1)
       AsyncStorage.setItem('@RESERVATIONS', JSON.stringify(updatedReservations))
 
