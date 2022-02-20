@@ -64,7 +64,7 @@ const DetailPage = () => {
             <Text style={data.selectedSeat ? styles.text : styles.text1}>Flight Name : {data.flightName}</Text>
             <Text style={data.selectedSeat ? styles.text : styles.text1}>Schedule Date : {data.scheduleDate}</Text>
             <Text style={data.selectedSeat ? styles.text : styles.text1}>Schedule Time : {data.scheduleTime}</Text>
-            <Text style={data.selectedSeat ? styles.text : styles.text1}>Flight Direction : {data.flightDirection === 'D' ? 'Departed' : 'Abroad'}</Text>
+            <Text style={data.selectedSeat ? styles.text : styles.text1}>Flight Direction : {data.flightDirection === 'D' ? 'Departure' : 'Abroad'}</Text>
             <Text style={data.selectedSeat ? styles.text : styles.text1}>Id : {data.id}</Text>
             <Text style={data.selectedSeat ? styles.text : styles.text1}>Service Type :  {data.serviceType}</Text>
             <Text style={data.selectedSeat ? styles.text : styles.text1}>Terminal : {data.terminal}</Text>
