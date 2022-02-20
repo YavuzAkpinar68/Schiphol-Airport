@@ -25,3 +25,7 @@ User can see the flight details with pressing to one flight card. At detail page
 After seat selection app generates a qr code which has info about flight details. Users can see their reservations and reservation details at Reservations page.
 At details they can find their seat number and qr code.If user wants to make read this code via other apps or they can use scanner page which is bassicaly a camera page and
 can read any barkod or qr code
+  
+  # Images
+  ![alt text](https://github.com/YavuzAkpinar68/Schiphol-Airport/blob/main/src/gifs/1.gif) ![alt text](https://github.com/YavuzAkpinar68/Schiphol-Airport/blob/main/src/gifs/2.gif) ![alt text](https://github.com/YavuzAkpinar68/Schiphol-Airport/blob/main/src/gifs/3.gif) ![alt text](https://github.com/YavuzAkpinar68/Schiphol-Airport/blob/main/src/gifs/4.gif)
+  <img src="https://github.com/YavuzAkpinar68/Schiphol-Airport/blob/main/src/gifs/image1.jpeg" alt="alt text" width="250" height="520">  <img src="https://github.com/YavuzAkpinar68/Schiphol-Airport/blob/main/src/gifs/image2.jpeg" alt="alt text" width="250" height="520">  <img src="https://github.com/YavuzAkpinar68/Schiphol-Airport/blob/main/src/gifs/image3.jpeg" alt="alt text" width="250" height="520">  <img src="https://github.com/YavuzAkpinar68/Schiphol-Airport/blob/main/src/gifs/image4.jpeg" alt="alt text" width="250" height="520">
